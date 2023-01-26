@@ -1,15 +1,13 @@
 import { useAuth } from "context/authContext";
 import useModal from "context/useModal";
 
-
 function Home() {
     const AuthContextAPI = useAuth();
     const ModalContextAPI = useModal()
-
+    
     const LoggedUser = AuthContextAPI.authData.user;
-
-    console.log("home", AuthContextAPI.authData.user)
-
+    
+    // console.log(LoggedUser)
     function openModalUpdatePayment() {
         ModalContextAPI.open()
         ModalContextAPI.setConfig({
