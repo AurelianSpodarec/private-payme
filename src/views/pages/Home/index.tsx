@@ -14,12 +14,7 @@ function Home() {
 
     return (
         <div>
-            
-            <button 
-                type="button" 
-                
-                onClick={() => open()}>Open Modal</button>
-
+            <button type="button" onClick={() => open()}>Open Modal</button>
         </div>
     )
 }
