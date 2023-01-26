@@ -6,11 +6,16 @@ import "./../src/styles/styles.scss";
 import App from 'views/App';
 import reportWebVitals from './utils/reportWebVitals';
 
+import ModalProvider from 'context/modalContext';
+
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
     <React.StrictMode>
-        <App />
+            <ModalProvider>
+                <App />
+            </ModalProvider>
     </React.StrictMode>
 );
 
