@@ -3,7 +3,9 @@ import useModal from "context/useModal";
 function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     const modalContext = useModal()
 
-    const { id, type, title, description, onAction, option } = config;
+    const { id, type, title, description, onAction, option, fields } = config;
+
+    console.log("Modal payment", fields)
 
     function handleAction(e:any) {
         e.preventDefault()
@@ -18,18 +20,23 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
 
     return (
         <div className="w-[340px] my-0 mx-auto text-center bg-[#1f2937] p-1 radius-md">
-        <div>
+        <div className="text-white">
 
             <h3>Update paument method</h3>
 
             <form>
-                <input placeholder="Hellooo"/>
+                <input placeholder="Card Number"/>
+                Input address
+                input address 2
+                country
+
+                state postcode
             </form>
 
             <footer>
-                <div>
-                    <button>Cancel</button>
-                    <button>Update</button>
+                <div className="flex flex-row items-center">
+                    <button type="button" onClick={(e) => handleCancel(e)}>Cancel</button>
+                    <button type="button" onClick={(e) => handleAction(e)}>Update</button>
                 </div>
 
                 <div>

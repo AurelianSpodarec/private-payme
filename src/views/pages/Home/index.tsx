@@ -12,7 +12,7 @@ function Home() {
         ModalContextAPI.open()
         ModalContextAPI.setConfig({
             type: "updatePayment",
-            fields: [...LoggedUser] 
+            fields: [LoggedUser] 
         })
     }
 

@@ -15,11 +15,8 @@ function App() {
         fetchAuthUser()
     }, [])
 
-    return (
-        <>
-            <Layout />
-        </>
-    );
+    return <Layout />
+        
 }
 
 export default App;
