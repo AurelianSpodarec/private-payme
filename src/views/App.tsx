@@ -1,10 +1,8 @@
-
+import Layout from './pages/Layout';
 
 function App() {
     return (
-        <div className="text-red-500 bg-green-500">
-                Hello
-        </div>
+        <Layout />
     );
 }
 
