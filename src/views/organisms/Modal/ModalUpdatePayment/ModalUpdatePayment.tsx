@@ -1,181 +1,50 @@
+import React, { useEffect, useState } from 'react';
+
 import useModal from "context/useModal";
+import useForm from "hooks/useForm";
+import countryList from "config/countryList.json";
 
 import Button from "views/atoms/Button/Button";
 import Input from "views/atoms/Input/Input";
 import Select from "views/atoms/Select/Select";
 
-import countryList from "config/countryList.json";
+import CardPaymentInput from "views/molecules/CardPaymentInput";
+
 import { SVGPoweredByStripe } from "svg/PoweredByStripe";
 import { SVGCreditCard } from "svg/CreditCard";
 
-import React, { useState } from 'react';
-import useForm from "hooks/useForm";
+
  
-
-function CreditCardInput() {
-  const [cardNumber, setCardNumber] = useState('');
-
-  const handleChange = (e:any) => {
-    const value = e.target.value;
-    const formattedValue = value.replace(/\s?/g, '').replace(/(.{4})/g, '$1 ').trim();
-    if (formattedValue.length <= 19) {
-      setCardNumber(formattedValue);
-    }
-  };
-
-  return (
-    <div className="flex flex-row w-fullitems-center placeholder:text-[#D4D4D4] appearance-none rounded-[3px] border border-gray-300 px-1 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                    
-        <div className="relative w-full flex items-center flex-shrink-0">
-
-            <div className="relative">
-                <input 
-                    type="text" 
-                    id="card-no"
-                    name="card-no" 
-                    className="w-full pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="Card Number" 
-                    value={cardNumber}
-                    onChange={handleChange}
-                    style={{
-                    fontSize: '1rem',
-                    color: 'transparent',
-                    }}
-                />
-                <div className="absolute" style={{
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    fontSize: '1rem',
-                    color: '#000',
-                    textAlign: 'center',
-                    pointerEvents: 'none'
-                }}>
-                    {cardNumber.replace(/[0-9]/g, '*')}
-                </div>
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-1">
-                <div className="w-[26px] h-[17px]">
-                    <SVGCreditCard />
-                </div>
-            </div>
-        
-        </div>
-
-        <div className="relative grow">
-        {/* <div className="absolute right-0 "> */}
-            <input type="text" name="credit-expiry" className="text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="MM/YY" />
-            <input type="text" name="credit-cvc" className="flex-shrink-0 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="CVC" />
-        {/* </div> */}
-        </div>
-
-    </div>
-  );
-}
-
-// export default CreditCardInput;
-
-
-// export default CreditCardInput;
-
-function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCInputProps}:any) {
-
-    
-
-    function validateCard(cardNumber:any) {
-        let sum = 0;
-        let alternate = false;
-        for (let i = cardNumber.length - 1; i >= 0; i--) {
-            let n = parseInt(cardNumber.substr(i, 1));
-            if (alternate) {
-                n *= 2;
-                if (n > 9) {
-                    n = (n % 10) + 1;
-                }
-            }
-            sum += n;
-            alternate = !alternate;
-        }
-        return (sum % 10 === 0);
-    }
-
-    function luhnCheck(num:any) {
-        let arr = (num + '')
-            .split('')
-            .reverse()
-            .map(x => parseInt(x));
-        let lastDigit = arr.splice(0, 1)[0];
-        let sum = arr.reduce((acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
-        sum += lastDigit;
-        return sum % 10 === 0;
-    }
-
-    return (
-        <div className="overflow-hidden rounded-[3px] py-2.5 px-2 border border-gray-300 relative flex items-center">
-            <div className="flex-none w-[26px] h-[17px]">
-                <SVGCreditCard />
-            </div>
-            
-            <label className="relative ml-2 flex items-center w-full card-label translate-x-[0px]">
-                <input 
-                    id="card-number" 
-                    autoComplete="cc-number" 
-                    className="absolute text-sm w-full  py-1 px-1 " 
-                    pattern="[0-9]*" 
-                    placeholder="Card number" 
-                    value={cardNumberInputProps.value}
-                    onChange={cardNumberInputProps.onChange}
-                    type="text"
-                />
-            </label>
-
-            <label className="relative ml-2 flex items-center w-[105px] translate-x-[0rem] card-label" data-max="MM / YY 9">
-                <input 
-                    id="card-expiry" 
-                    autoComplete="cc-exp" 
-                    className="absolute text-sm w-full py-1 px-1 " 
-                    pattern="[0-9]*" 
-                    placeholder="MM/YY" 
-                    value={cardExpiryInputProps.value}
-                    onChange={cardExpiryInputProps.onChange}
-                    type="text"
-                />
-            </label>
-
-            <label className="relative ml-2 flex items-center  translate-x-[0rem] card-label" data-max="9999">
-                <input 
-                    id="cvc" 
-                    autoComplete="off" 
-                    className="absolute text-sm w-full py-1 px-1 " 
-                    pattern="[0-9]*" 
-                    placeholder="CVC" 
-                    value={cardCVCInputProps.value}
-                    onChange={cardCVCInputProps.onChange}
-                    type="text"
-                />
-            </label>
-        </div>
-    )
-}
-
-
 function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
+    const { id, type, title, description, onAction, option, fields } = config;
+    
     const modalContext = useModal()
 
-    const { id, type, title, description, onAction, option, fields } = config;
+    const userInfo = fields[0]
+    const form = useForm(null, {
+        // card: {
+            number: "1234123412341234",
+            expiry: "0632",
+            cvc: "000",
+        // },
+        address_one: userInfo.address_one,
+        address_two: userInfo.address_two,
+        country: "",
+        state: userInfo.state,
+        post_code: userInfo.post_code
+    })
 
+    console.log("Modal payment form", form.values.address_one)
 
-    console.log("Modal payment", fields[0])
-
-    function buildForm() {
-        // TODO:
-        // ORDER:
+    function submitForm(e:any) {
+        e.preventDefault();
+        console.log("submit values", form.values)
     }
 
     function handleAction(e:any) {
         e.preventDefault()
-        onAction()
+        // onAction()
+        // submitForm()
         modalContext.close()
     }
 
@@ -184,19 +53,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
         modalContext.close()
     }
 
-    const form = useForm(null, {
-        card: {
-            number: "232424223234323",
-            expiry: "0632",
-            cvc: "000",
-        },
-        address_one: fields[0].address_one,
-        address_two: fields[0].address_two,
-        country: "",
-        state: fields[0].state,
-        post_code: fields[0].post_code
-    })
-    
+   
     return (
         <div 
             className="w-[410px] my-auto mx-auto bg-white rounded-md" 
@@ -209,27 +66,30 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                 <h3 className="text-xl font-medium text-[#111111]">Update payment method</h3>
             </header>
  
-            <form className="">
-                    
+            <form className="" onSubmit={(e:any) => submitForm(e)}>
+
+                <section> 
                 <div className="mb-6">
-                    {/* <CreditCardInput /> */}
 
                     <CardPaymentInput 
                         cardNumberInputProps={{ 
-                            value: form.values.card.number,
-                            onChange:(e:any) => form.handleChange(e)
+                            value: form.values.number,
+                            name: "number",
+                            onChange:(e:any) => form.handleChange(e),
+                            maskInitial: 12,
                         }}
                         cardExpiryInputProps={{ 
-                            value: form.values.card.expiry,
+                            value: form.values.expiry,
+                            name: "expiry",
                             onChange: (e:any) => form.handleChange(e)
                         }}
                         cardCVCInputProps={{ 
-                            value: form.values.card.cvc,
+                            value: form.values.cvc,
+                            name: "cvc",
                             onChange: (e:any) => form.handleChange(e)
                          }}
                     />
 
- 
                 </div>
 
                 <div className="mb-6">
@@ -237,8 +97,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                         Address line 1
                     </label>
                     <Input  
-                        id="address-line-1"
-                        name="address-line-1"
+                        id="address_one"
+                        name="address_one"
                         type="text"
                         className="mt-1"
                         placeholder="e.g. 123 Fake St"
@@ -254,13 +114,13 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                     Address line 2
                     </label>
                     <Input  
-                        id="address-line-1"
-                        name="address-line-1"
+                        id="address_two"
+                        name="address_two"
                         type="text"
                         className="mt-1"
                         placeholder="e.g. 123 Fake St"
                         autoComplete="street-address"
-                        value={form.values.address_one}
+                        value={form.values.address_two}
                         onChange={(e:any) => form.handleChange(e)}
                         required  
                     />
@@ -268,7 +128,11 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
 
                 <div className="mb-6">
                     {/* <input placeholder="Country"/> */}
-                    <Select  data={countryList} onValueChange={(e:any) => console.log(e)}  />
+                    <Select 
+                        id="country"
+                        name="country"
+                        data={countryList} 
+                        onValueChange={(e:any) => console.log(e)}  />
                 </div>
 
                 <div className="mb-5 flex flex-row">
@@ -284,6 +148,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                             type="text"
                             placeholder="e.g. Middlesex"
                             autoComplete="street-address"
+                            value={form.values.state}
+                            onChange={(e:any) => form.handleChange(e)}
                             required
                         />
 
@@ -294,31 +160,33 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                         Postcode
                         </label>
                         <Input  
-                            id="postal-code"
-                            name="postal-code"
+                            id="post_code"
+                            name="post_code"
                             className="mt-1"
                             type="text"
                             placeholder="e.g. W11 1NS"
                             autoComplete="street-address"
+                            value={form.values.post_code}
+                            onChange={(e:any) => form.handleChange(e)}
                             required
                         />
                     </div>
 
                 </div>
+                </section>
 
-            </form>
-
-            <footer className="flex flex-col">
-                <div className="flex flex-row items-center space-x-2 mb-5">
-                    <Button variant="primary" kind="outline" block onClick={(e:any) => handleCancel(e)}>Cancel</Button>
-                    <Button variant="primary" kind="solid" block onClick={(e:any) => handleAction(e)}>Update</Button>
-                </div>
-                <div className="w-full text-center">
-                    <div className="h-4">
-                    <SVGPoweredByStripe />
+                <footer className="flex flex-col">
+                    <div className="flex flex-row items-center space-x-2 mb-5">
+                        <Button variant="primary" kind="outline" block onClick={(e:any) => handleCancel(e)}>Cancel</Button>
+                        <Button variant="primary" kind="solid" type="submit" block>Update</Button>
                     </div>
-                </div>
-            </footer>
+                    <div className="w-full text-center">
+                        <div className="h-4">
+                        <SVGPoweredByStripe />
+                        </div>
+                    </div>
+                </footer>
+            </form>
 
         
         </div>    

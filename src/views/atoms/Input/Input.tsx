@@ -34,7 +34,7 @@ const Input: React.FC<InputProps> = (props) => {
             placeholder={placeholder} 
             defaultValue={defaultValue}
             value={value}
-            onChange={onChange}
+            onChange={(e) => onChange(e)}
             className={`
                 block w-full placeholder:text-[#D4D4D4] appearance-none rounded-[3px] border border-gray-300 px-3 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
                 ${className} 
