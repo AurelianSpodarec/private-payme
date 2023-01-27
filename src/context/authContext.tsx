@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 interface AuthData {
     authData?: any;
+    setAuthData?: any;
     user: {
         _id: string;
         email: string;

@@ -9,9 +9,8 @@ function App() {
     useEffect( () => {
         async function fetchAuthUser() {
             const res = await getAuthUser()
-            AuthContextAPI.authData.user = res[0]
+            AuthContextAPI.setAuthData({...AuthContextAPI.authData, user: {...res[0]}})
         }    
-
         fetchAuthUser()
     }, [])
 

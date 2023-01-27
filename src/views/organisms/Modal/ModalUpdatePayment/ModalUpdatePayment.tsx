@@ -9,6 +9,7 @@ import { SVGPoweredByStripe } from "svg/PoweredByStripe";
 import { SVGCreditCard } from "svg/CreditCard";
 
 import React, { useState } from 'react';
+import useForm from "hooks/useForm";
  
 
 function CreditCardInput() {
@@ -78,8 +79,37 @@ function CreditCardInput() {
 
 // export default CreditCardInput;
 
-function CardPaymentInput() {
+function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCInputProps}:any) {
+
     
+
+    function validateCard(cardNumber:any) {
+        let sum = 0;
+        let alternate = false;
+        for (let i = cardNumber.length - 1; i >= 0; i--) {
+            let n = parseInt(cardNumber.substr(i, 1));
+            if (alternate) {
+                n *= 2;
+                if (n > 9) {
+                    n = (n % 10) + 1;
+                }
+            }
+            sum += n;
+            alternate = !alternate;
+        }
+        return (sum % 10 === 0);
+    }
+
+    function luhnCheck(num:any) {
+        let arr = (num + '')
+            .split('')
+            .reverse()
+            .map(x => parseInt(x));
+        let lastDigit = arr.splice(0, 1)[0];
+        let sum = arr.reduce((acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
+        sum += lastDigit;
+        return sum % 10 === 0;
+    }
 
     return (
         <div className="overflow-hidden rounded-[3px] py-2.5 px-2 border border-gray-300 relative flex items-center">
@@ -87,24 +117,28 @@ function CardPaymentInput() {
                 <SVGCreditCard />
             </div>
             
-            <label className="relative ml-2 w-full flex items-center card-label translate-x-0">
+            <label className="relative ml-2 flex items-center w-full card-label translate-x-[0px]">
                 <input 
                     id="card-number" 
                     autoComplete="cc-number" 
                     className="absolute text-sm w-full  py-1 px-1 " 
                     pattern="[0-9]*" 
                     placeholder="Card number" 
+                    value={cardNumberInputProps.value}
+                    onChange={cardNumberInputProps.onChange}
                     type="text"
                 />
             </label>
 
-            <label className="relative ml-2 flex items-center translate-x-[0rem] card-label" data-max="MM / YY 9">
+            <label className="relative ml-2 flex items-center w-[105px] translate-x-[0rem] card-label" data-max="MM / YY 9">
                 <input 
                     id="card-expiry" 
                     autoComplete="cc-exp" 
                     className="absolute text-sm w-full py-1 px-1 " 
                     pattern="[0-9]*" 
                     placeholder="MM/YY" 
+                    value={cardExpiryInputProps.value}
+                    onChange={cardExpiryInputProps.onChange}
                     type="text"
                 />
             </label>
@@ -116,6 +150,8 @@ function CardPaymentInput() {
                     className="absolute text-sm w-full py-1 px-1 " 
                     pattern="[0-9]*" 
                     placeholder="CVC" 
+                    value={cardCVCInputProps.value}
+                    onChange={cardCVCInputProps.onChange}
                     type="text"
                 />
             </label>
@@ -130,7 +166,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     const { id, type, title, description, onAction, option, fields } = config;
 
 
-    // console.log("Modal payment", fields)
+    console.log("Modal payment", fields[0])
 
     function buildForm() {
         // TODO:
@@ -148,20 +184,25 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
         modalContext.close()
     }
 
-    {/* 
-        TODO:
-        - Country should not auto-populate so should be selected manually by the user
-        - Card details should not auto-populate so should be entered manually by the user
-
-        // Populate address, address2, state, postcode
-    */}
+    const form = useForm(null, {
+        card: {
+            number: "232424223234323",
+            expiry: "0632",
+            cvc: "000",
+        },
+        address_one: fields[0].address_one,
+        address_two: fields[0].address_two,
+        country: "",
+        state: fields[0].state,
+        post_code: fields[0].post_code
+    })
     
     return (
         <div 
             className="w-[410px] my-auto mx-auto bg-white rounded-md" 
             style={{ "boxShadow": "0px 0px 10px rgba(0, 0, 0, 0.25)" }}
         >
-        <div className="p-8">
+        <div className="p-4 md:p-8">
 
 
             <header className="mb-5">
@@ -173,7 +214,20 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                 <div className="mb-6">
                     {/* <CreditCardInput /> */}
 
-                    <CardPaymentInput />
+                    <CardPaymentInput 
+                        cardNumberInputProps={{ 
+                            value: form.values.card.number,
+                            onChange:(e:any) => form.handleChange(e)
+                        }}
+                        cardExpiryInputProps={{ 
+                            value: form.values.card.expiry,
+                            onChange: (e:any) => form.handleChange(e)
+                        }}
+                        cardCVCInputProps={{ 
+                            value: form.values.card.cvc,
+                            onChange: (e:any) => form.handleChange(e)
+                         }}
+                    />
 
  
                 </div>
@@ -189,6 +243,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                         className="mt-1"
                         placeholder="e.g. 123 Fake St"
                         autoComplete="street-address"
+                        value={form.values.address_one}
+                        onChange={(e:any) => form.handleChange(e)}
                         required  
                     />
                 </div>
@@ -204,6 +260,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                         className="mt-1"
                         placeholder="e.g. 123 Fake St"
                         autoComplete="street-address"
+                        value={form.values.address_one}
+                        onChange={(e:any) => form.handleChange(e)}
                         required  
                     />
                 </div>

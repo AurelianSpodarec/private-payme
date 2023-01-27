@@ -20,11 +20,12 @@ const Input: React.FC<InputProps> = (props) => {
         defaultValue,
         required = false,
         helperText,
+        value,
+        onChange,
     } = props;
 
     return (
         <input 
-           
             {...props}     
             id={id}
             name={name}
@@ -32,6 +33,8 @@ const Input: React.FC<InputProps> = (props) => {
             autoComplete={autoComplete}
             placeholder={placeholder} 
             defaultValue={defaultValue}
+            value={value}
+            onChange={onChange}
             className={`
                 block w-full placeholder:text-[#D4D4D4] appearance-none rounded-[3px] border border-gray-300 px-3 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
                 ${className} 
@@ -60,4 +63,6 @@ interface InputProps {
     defaultValue?: string;
     helperText?: string;
     required?: boolean;
+    value?: any;
+    onChange?: any;
 }
