@@ -3,6 +3,7 @@ import useModal from "context/useModal";
 import { useEffect, useState } from "react";
 import Button from "views/atoms/Button/Button";
 
+
 function Home() {
     const AuthContextAPI = useAuth();
     const ModalContextAPI = useModal()
@@ -12,7 +13,8 @@ function Home() {
     function openModalUpdatePayment() {
         ModalContextAPI.open()
         ModalContextAPI.setConfig({
-            type: "updatePayment",
+            type: "payment",
+            option: "update",
             fields: [{...User}] 
         })
     }
@@ -20,14 +22,15 @@ function Home() {
     function openModalDeletePayment() {
         ModalContextAPI.open()
         ModalContextAPI.setConfig({
-            type: "deletePayment",
+            type: "payment",
+            option: "delete",
             fields: [{...User}] 
         })
     }
 
  
     return (
-        <div>
+        <div className="p-8">
 
             <section className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
 

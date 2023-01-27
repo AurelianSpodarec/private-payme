@@ -1,8 +1,11 @@
-import useModal from 'context/useModal';
 import { useState } from 'react';
 import * as ReactDOM from 'react-dom';
-import ModalDeletePayment from './ModalUpdatePayment/ModalDeletePayment';
-import ModalUpdatePayment from './ModalUpdatePayment/ModalUpdatePayment';
+
+import useModal from 'context/useModal';
+
+
+import ModalPayment from './ModalPayment/ModalPayment';
+
 
 const doc = document.getElementById('root');
 
@@ -11,8 +14,8 @@ function CreateModal() {
     const modalData = modalContext.data;
 
     const modalOptions:any = {
-        updatePayment: <ModalUpdatePayment config={modalData} />,
-        deletePayment: <ModalDeletePayment config={modalData} />
+        payment: <ModalPayment config={modalData}/>,
+        // configm: <ModalConfirm config={modalData} />
     }
 
     if(!modalContext.isOpen || !doc) return <></>
