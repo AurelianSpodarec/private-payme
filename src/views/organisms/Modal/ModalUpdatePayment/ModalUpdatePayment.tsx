@@ -1,5 +1,6 @@
 import useModal from "context/useModal";
 import Button from "views/atoms/Button/Button";
+import Input from "views/atoms/Input/Input";
 
 function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     const modalContext = useModal()
@@ -33,14 +34,15 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     */}
     
     return (
-        <div className="w-[410px] my-0 mx-auto bg-[#1f2937] p-1 radius-md">
-        <div className="text-white">
+        <div className="w-[410px] my-0 mx-auto bg-white rounded-md">
+        <div className="p-8">
+
 
             <header>
-                <h3 className="text-xl">Update paument method</h3>
+                <h3 className="text-xl text-black">Update paument method</h3>
             </header>
-
-            <form className="p-4">
+ 
+            <form className="">
                     
                 <div>
                  
@@ -60,34 +62,34 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-100">
+                    <label htmlFor="email" className="block text-sm font-medium text-black">
                         Address Line 1
                     </label>
                     <div className="mt-1">
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
+                 
+                    <Input  
+                        id="address-line-1"
+                        name="address-line-1"
+                        type="text"
                         autoComplete="street-address"
-                        required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    />
+                        required  />
                     </div>
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-100">
+                    <label htmlFor="email" className="block text-sm font-medium text-black">
                     Address Line 2
                     </label>
                     <div className="mt-1">
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="street-address"
-                        required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    />
+                  
+                        <Input  
+                            id="address-line-1"
+                            name="address-line-1"
+                            type="text"
+                            autoComplete="street-address"
+                            required  
+                        />
+                    
                     </div>
                 </div>
 
@@ -96,49 +98,49 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
 
                 <div className="flex flex-row">
                     <div>
-                        <label htmlFor="state" className="block text-sm font-medium text-gray-100">
+                        <label htmlFor="state" className="block text-sm font-medium text-black">
                         State (optional)
                         </label>
                         <div className="mt-1">
-                        <input
+                        <Input  
                             id="state"
                             name="state"
                             type="text"
-                            autoComplete="address-level1"
+                            autoComplete="street-address"
                             required
-                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         />
                         </div>
                     </div>
 
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-100">
+                        <label htmlFor="email" className="block text-sm font-medium text-black">
                        Postcode
                         </label>
                         <div className="mt-1">
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            autoComplete="postal-code"
+                        <Input  
+                            id="postal-code"
+                            name="postal-code"
+                            type="text"
+                            autoComplete="street-address"
                             required
-                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-800 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         />
                         </div>
                     </div>
                 </div>
+
             </form>
 
-            <footer>
-                <div className="flex flex-row items-center">
-                    <Button kind="outline" onClick={(e:any) => handleCancel(e)}>Cancel</Button>
-                    <Button kind="solid" onClick={(e:any) => handleAction(e)}>Update</Button>
+            <footer className="flex flex-col">
+                <div className="flex flex-row items-center space-x-2">
+                    <Button variant="primary" kind="outline" block onClick={(e:any) => handleCancel(e)}>Cancel</Button>
+                    <Button variant="primary" kind="solid" block onClick={(e:any) => handleAction(e)}>Update</Button>
                 </div>
 
-                <div>
+                <div className="w-full text-center">
                     <span>Powered by stripe</span>
                 </div>
             </footer>
+
         
         </div>    
         </div>

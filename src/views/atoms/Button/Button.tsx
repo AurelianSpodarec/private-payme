@@ -9,9 +9,10 @@
         kind = "solid",
         type = "button",
         size = "md",
-        radius = "md",
+        radius = "xs",
         ref,
         disabled,
+        block,
         icon,
         iconPosition,
     } = props;
@@ -29,9 +30,10 @@
             onClick={onClick}
             disabled={disabled}
             className={`
+                ${block ? 'w-full' : ""}
                 ${prefix} ${kind ? `${prefix}-${kind}` : ''} 
                 ${variant ? `${prefix}-${variant}` : ''} 
-                ${size ? `${prefix}-${size}` : ''}`
+                ${size ? `${prefix}-${size}` : ''}`.trim()
             }
         >
             {content}

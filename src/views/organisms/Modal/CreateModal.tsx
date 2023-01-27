@@ -22,7 +22,7 @@ function CreateModal() {
                 ${modalContext.isOpen ? 'visible' : 'hidden'} 
             `}
         >
-            <div className="m-auto top-1/2 translateY-[-50%] modal__inner">
+            <div className="m-auto relative translate-y-1/2">
                 {modalOptions[modalData.type]}
             </div>
         </aside>
