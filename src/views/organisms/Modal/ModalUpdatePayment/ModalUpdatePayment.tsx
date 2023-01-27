@@ -28,7 +28,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     const userInfo = fields[0]
     const form = useForm(null, {
         // card: {
-            number: "1234123412341234",
+            number: null,
             expiry: "0632",
             cvc: "000",
         // },
@@ -88,7 +88,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                             cardCVCInputProps={{ 
                                 value: form.values.cvc,
                                 name: "cvc",
-                                onChange: (e:any) => form.handleChange(e)
+                                onChange: (e:any) => form.handleChange(e),
+                                maskInitial: 3
                             }}
                         />
                     </ModalRow>
