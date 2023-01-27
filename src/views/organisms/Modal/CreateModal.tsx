@@ -1,6 +1,7 @@
 import useModal from 'context/useModal';
 import { useState } from 'react';
 import * as ReactDOM from 'react-dom';
+import ModalDeletePayment from './ModalUpdatePayment/ModalDeletePayment';
 import ModalUpdatePayment from './ModalUpdatePayment/ModalUpdatePayment';
 
 const doc = document.getElementById('root');
@@ -11,6 +12,7 @@ function CreateModal() {
 
     const modalOptions:any = {
         updatePayment: <ModalUpdatePayment config={modalData} />,
+        deletePayment: <ModalDeletePayment config={modalData} />
     }
 
     if(!modalContext.isOpen || !doc) return <></>

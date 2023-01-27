@@ -17,6 +17,14 @@ function Home() {
         })
     }
 
+    function openModalDeletePayment() {
+        ModalContextAPI.open()
+        ModalContextAPI.setConfig({
+            type: "deletePayment",
+            fields: [{...User}] 
+        })
+    }
+
  
     return (
         <div>
@@ -42,15 +50,15 @@ function Home() {
                     </p>
                 </div>
                 </div>
-                
+
                 <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">   
-                    <Button kind="outline" onClick={() => openModalUpdatePayment()}>Delete Payment</Button> 
+                    <Button kind="outline" onClick={() => openModalDeletePayment()}>Delete Payment</Button> 
                     <Button onClick={() => openModalUpdatePayment()}>Update Payment</Button>
                 </div>
 
             </section>
 
-
+{/* 
             <section aria-labelledby="applicant-information-title w-full">
                 <div className="bg-white shadow sm:rounded-lg w-full">
 
@@ -93,7 +101,7 @@ function Home() {
                     </div>
 
                 </div>
-                </section>
+                </section> */}
  
         </div>
     )

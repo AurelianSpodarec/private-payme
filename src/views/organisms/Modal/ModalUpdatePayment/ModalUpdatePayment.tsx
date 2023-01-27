@@ -4,20 +4,16 @@ import useModal from "context/useModal";
 import useForm from "hooks/useForm";
 import countryList from "config/countryList.json";
 
-import Button from "views/atoms/Button/Button";
 import Input from "views/atoms/Input/Input";
 import Select from "views/atoms/Select/Select";
 
 import CardPaymentInput from "views/molecules/CardPaymentInput/CardPaymentInput";
 
-import { SVGPoweredByStripe } from "svg/PoweredByStripe";
-import { SVGCreditCard } from "svg/CreditCard";
 import ModalHeader from '../_components/ModalHeader';
 import ModalFooter from '../_components/ModalFooter';
 
 import ModalContent from '../_components/ModalContent/ModalContent';
 import ModalRow from '../_components/ModalContent/ModalRow';
-
 
 
 function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
@@ -66,7 +62,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
         >
         <div className="p-4 md:p-8">
 
-            <ModalHeader title="Update payment method" />
+            <ModalHeader title="Update payment" />
          
             <form className="" onSubmit={(e:any) => submitForm(e)}>
 
@@ -180,7 +176,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
 
                 </ModalContent>
 
-                <ModalFooter handleCancel={handleCancel} />
+                <ModalFooter actionTitle={"Update"} handleCancel={handleCancel} />
             </form>
 
         
