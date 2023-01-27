@@ -15,7 +15,7 @@ function Layout() {
                     {/* Imaginary Header */}
                 </header>
 
-                <main>
+                <main className="w-full h-full">
                     <CustomRoutes />
                 </main>
 

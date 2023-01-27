@@ -1,57 +1,75 @@
 import { useEffect, useState } from "react";
 import { SVGCreditCard } from "svg/CreditCard";
+import { cardPaymentHelper } from "./cardPaymentHelper";
+
 
 function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCInputProps}:any) {
 
     const [cardNumber, setCardNumber] = useState(cardNumberInputProps.value);
+    const [cursorPosition, setCursorPosition] = useState(0);
 
+    const [expiryNumber, setExpiryNumber] = useState(cardExpiryInputProps.value);
    
+    const [expiry, setExpiry] = useState('');
+
+
     
-    const luhnCheck = (val:any) => {
-        let checksum = 0; // running checksum total
-        let j = 1; // takes value of 1 or 2
-    
-        for (let i = val.length - 1; i >= 0; i--) {
-        let calc = 0;
-        calc = Number(val.charAt(i)) * j;
-        if (calc > 9) {
-            checksum = checksum + 1;
-            calc = calc - 10;
-        }
-        checksum = checksum + calc;
-    
-        if (j == 1) {
-            j = 2;
-        } else {
-            j = 1;
-        }
-        }
-    
-        //Check if it is divisible by 10 or not.
-        return (checksum % 10) == 0;
+    // HELPERS
+    // =======================================================
+    function handleCardNumberFocus(e: any) {
+        // Get current cursor position
+        let cursorPos = e.target.selectionStart;
+        // Set cursor position
+        e.target.setSelectionRange(cursorPos, cursorPos);
+        // Update cursor position state
+        setCursorPosition(cursorPos);
     }
 
-    function formatCard(value:any) {
-        console.log(value)
-        if(value === null) return;
-        return value.replace(/\D/g,'').replace(/(\d{4})/g, '$1 ').trim();
-    }
 
-    
-    function handleCardNumberChange(e: any) {
 
-        let formattedCardNumber = formatCard(e.target.value)
+    // EVENT HANDLERS
+    // =======================================================
+
+    function handleExpiryChange(e:any) {
+        const { value } = e.target;
+        let exp = value;
         
-        setCardNumber(formattedCardNumber);
-        cardNumberInputProps.onChange(formattedCardNumber);
+        if (value.length === 2) {
+            exp = value + '/';
+        }
+
+        setExpiry(exp);
+        cardExpiryInputProps.onChange(cardPaymentHelper.expirtyFormat(value));
     }
 
+    function handleCardNumberChange(e: any) {
+        let inputValue = e.target.value;
+        let cursorPos = e.target.selectionStart;
+
+        setCursorPosition(cursorPos);
+        if (e.keyCode === 8) {
+            inputValue = inputValue.slice(0, -1);
+        }
+        inputValue = inputValue.replace(/\s/g,'');
+        if(inputValue.length > 16) {
+            inputValue = inputValue.substring(0, 16);
+        }
+        let formattedCardNumber = cardPaymentHelper.formatCard(inputValue);
+        if(formattedCardNumber) {
+            setCardNumber(formattedCardNumber);
+            cardNumberInputProps.onChange(formattedCardNumber);
+        }
+    }
+
+
+
+    // OTHER
+    // =======================================================
 
     useEffect(() => {
         if(cardNumberInputProps.value === "") return
-        let formattedCardNumber = formatCard(cardNumberInputProps.value)
 
-        // formattedCardNumber = formattedCardNumber.replace(/\D/g,'').replace(/(\d{4})/g, '$1 ').trim();
+        let formattedCardNumber = cardPaymentHelper.formatCard(cardNumberInputProps.value)
         setCardNumber(formattedCardNumber);
     }, [cardNumberInputProps.value]);
 
@@ -73,33 +91,36 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
                         placeholder="Card number" 
                         value={cardNumber}
                         onChange={(e) => handleCardNumberChange(e)}
+                        onFocus={(e) => handleCardNumberFocus(e)}
                         type="text"
                     />
                 </label>
 
                 <label className="relative ml-2 flex items-center w-[105px] translate-x-[0rem] card-label" data-max="MM / YY 9">
                     <input 
+                        maxLength={5}
                         id={cardExpiryInputProps.id} 
                         name={cardExpiryInputProps.name}
                         autoComplete="cc-exp" 
                         className="absolute text-sm w-full py-1 px-1 " 
                         pattern="[0-9]*" 
                         placeholder="MM/YY" 
-                        value={cardExpiryInputProps.value}
-                        onChange={(e) => cardExpiryInputProps(e)}
+                        value={expiryNumber}
+                        onChange={(e) => handleExpiryChange(e)}
                         type="text"
                     />
                 </label>
 
                 <label className="relative ml-2 flex items-center  translate-x-[0rem] card-label" data-max="9999">
                     <input 
+                        maxLength={3}
                         id={cardCVCInputProps.name}
                         name={cardCVCInputProps.name}
                         autoComplete="off" 
                         className="absolute text-sm w-full py-1 px-1 " 
                         pattern="[0-9]*" 
                         placeholder="CVC" 
-                        value={cardCVCInputProps.value}
+                        value={cardPaymentHelper.maskInput(cardCVCInputProps.value, '*')}
                         onChange={(e) => cardCVCInputProps.onChange(e)}
                         type="text"
                     />

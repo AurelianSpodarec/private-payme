@@ -8,7 +8,7 @@ import Button from "views/atoms/Button/Button";
 import Input from "views/atoms/Input/Input";
 import Select from "views/atoms/Select/Select";
 
-import CardPaymentInput from "views/molecules/CardPaymentInput";
+import CardPaymentInput from "views/molecules/CardPaymentInput/CardPaymentInput";
 
 import { SVGPoweredByStripe } from "svg/PoweredByStripe";
 import { SVGCreditCard } from "svg/CreditCard";
