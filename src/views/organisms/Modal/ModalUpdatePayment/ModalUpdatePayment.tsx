@@ -12,9 +12,14 @@ import CardPaymentInput from "views/molecules/CardPaymentInput";
 
 import { SVGPoweredByStripe } from "svg/PoweredByStripe";
 import { SVGCreditCard } from "svg/CreditCard";
+import ModalHeader from '../_components/ModalHeader';
+import ModalFooter from '../_components/ModalFooter';
+
+import ModalContent from '../_components/ModalContent/ModalContent';
+import ModalRow from '../_components/ModalContent/ModalRow';
 
 
- 
+
 function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     const { id, type, title, description, onAction, option, fields } = config;
     
@@ -61,131 +66,120 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
         >
         <div className="p-4 md:p-8">
 
-
-            <header className="mb-5">
-                <h3 className="text-xl font-medium text-[#111111]">Update payment method</h3>
-            </header>
- 
+            <ModalHeader title="Update payment method" />
+         
             <form className="" onSubmit={(e:any) => submitForm(e)}>
 
-                <section> 
-                <div className="mb-6">
-
-                    <CardPaymentInput 
-                        cardNumberInputProps={{ 
-                            value: form.values.number,
-                            name: "number",
-                            onChange:(e:any) => form.handleChange(e),
-                            maskInitial: 12,
-                        }}
-                        cardExpiryInputProps={{ 
-                            value: form.values.expiry,
-                            name: "expiry",
-                            onChange: (e:any) => form.handleChange(e)
-                        }}
-                        cardCVCInputProps={{ 
-                            value: form.values.cvc,
-                            name: "cvc",
-                            onChange: (e:any) => form.handleChange(e)
-                         }}
-                    />
-
-                </div>
-
-                <div className="mb-6">
-                    <label htmlFor="email" className="block text-sm leading-2 font-medium text-skin-primary">
-                        Address line 1
-                    </label>
-                    <Input  
-                        id="address_one"
-                        name="address_one"
-                        type="text"
-                        className="mt-1"
-                        placeholder="e.g. 123 Fake St"
-                        autoComplete="street-address"
-                        value={form.values.address_one}
-                        onChange={(e:any) => form.handleChange(e)}
-                        required  
-                    />
-                </div>
-
-                <div className="mb-6">
-                    <label htmlFor="email" className="block text-sm leading-2 font-medium text-skin-primary">
-                    Address line 2
-                    </label>
-                    <Input  
-                        id="address_two"
-                        name="address_two"
-                        type="text"
-                        className="mt-1"
-                        placeholder="e.g. 123 Fake St"
-                        autoComplete="street-address"
-                        value={form.values.address_two}
-                        onChange={(e:any) => form.handleChange(e)}
-                        required  
-                    />
-                </div>
-
-                <div className="mb-6">
-                    {/* <input placeholder="Country"/> */}
-                    <Select 
-                        id="country"
-                        name="country"
-                        data={countryList} 
-                        onValueChange={(e:any) => console.log(e)}  />
-                </div>
-
-                <div className="mb-5 flex flex-row">
-
-                    <div>
-                        <label htmlFor="state" className="block text-sm leading-2 font-medium text-skin-primary">
-                        State <span className="text-[#D4D4D4]">(optional)</span>
-                        </label>
-                        <Input  
-                            id="state"
-                            name="state"
-                            className="mt-1"
-                            type="text"
-                            placeholder="e.g. Middlesex"
-                            autoComplete="street-address"
-                            value={form.values.state}
-                            onChange={(e:any) => form.handleChange(e)}
-                            required
+              
+                <ModalContent> 
+                    <ModalRow>
+                        <CardPaymentInput 
+                            cardNumberInputProps={{ 
+                                value: form.values.number,
+                                name: "number",
+                                onChange:(e:any) => form.handleChange(e),
+                                maskInitial: 12,
+                            }}
+                            cardExpiryInputProps={{ 
+                                value: form.values.expiry,
+                                name: "expiry",
+                                onChange: (e:any) => form.handleChange(e)
+                            }}
+                            cardCVCInputProps={{ 
+                                value: form.values.cvc,
+                                name: "cvc",
+                                onChange: (e:any) => form.handleChange(e)
+                            }}
                         />
+                    </ModalRow>
 
-                    </div>
-
-                    <div>
+                    <ModalRow>
                         <label htmlFor="email" className="block text-sm leading-2 font-medium text-skin-primary">
-                        Postcode
+                            Address line 1
                         </label>
                         <Input  
-                            id="post_code"
-                            name="post_code"
-                            className="mt-1"
+                            id="address_one"
+                            name="address_one"
                             type="text"
-                            placeholder="e.g. W11 1NS"
+                            className="mt-1"
+                            placeholder="e.g. 123 Fake St"
                             autoComplete="street-address"
-                            value={form.values.post_code}
+                            value={form.values.address_one}
                             onChange={(e:any) => form.handleChange(e)}
-                            required
+                            required  
                         />
-                    </div>
+                    </ModalRow>
 
-                </div>
-                </section>
+                    <ModalRow>
+                        <label htmlFor="email" className="block text-sm leading-2 font-medium text-skin-primary">
+                        Address line 2
+                        </label>
+                        <Input  
+                            id="address_two"
+                            name="address_two"
+                            type="text"
+                            className="mt-1"
+                            placeholder="e.g. 123 Fake St"
+                            autoComplete="street-address"
+                            value={form.values.address_two}
+                            onChange={(e:any) => form.handleChange(e)}
+                            required  
+                        />
+                    </ModalRow>
 
-                <footer className="flex flex-col">
-                    <div className="flex flex-row items-center space-x-2 mb-5">
-                        <Button variant="primary" kind="outline" block onClick={(e:any) => handleCancel(e)}>Cancel</Button>
-                        <Button variant="primary" kind="solid" type="submit" block>Update</Button>
-                    </div>
-                    <div className="w-full text-center">
-                        <div className="h-4">
-                        <SVGPoweredByStripe />
+                    <ModalRow>
+                        <Select 
+                            id="country"
+                            name="country"
+                            data={countryList} 
+                            onValueChange={(e:any) => console.log(e)}  
+                        />
+                    </ModalRow>
+
+                    <div className="mb-5">
+                    <div className="flex flex-row">
+
+                        <div>
+                            <label htmlFor="state" className="block text-sm leading-2 font-medium text-skin-primary">
+                            State <span className="text-[#D4D4D4]">(optional)</span>
+                            </label>
+                            <Input  
+                                id="state"
+                                name="state"
+                                className="mt-1"
+                                type="text"
+                                placeholder="e.g. Middlesex"
+                                autoComplete="street-address"
+                                value={form.values.state}
+                                onChange={(e:any) => form.handleChange(e)}
+                                required
+                            />
+
                         </div>
+
+                        <div>
+                            <label htmlFor="email" className="block text-sm leading-2 font-medium text-skin-primary">
+                            Postcode
+                            </label>
+                            <Input  
+                                id="post_code"
+                                name="post_code"
+                                className="mt-1"
+                                type="text"
+                                placeholder="e.g. W11 1NS"
+                                autoComplete="street-address"
+                                value={form.values.post_code}
+                                onChange={(e:any) => form.handleChange(e)}
+                                required
+                            />
+                        </div>
+
                     </div>
-                </footer>
+                    </div>
+
+                </ModalContent>
+
+                <ModalFooter handleCancel={handleCancel} />
             </form>
 
         
@@ -195,6 +189,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
 }
 
 export default ModalUpdatePayment;
+
+
 
 interface ModalUpdatePaymentProps {
     config: any;
