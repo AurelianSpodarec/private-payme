@@ -1,0 +1,203 @@
+// ==========================================================================
+// # Vendor: Fonts
+// ==========================================================================
+//
+//  Table of Contents
+//  - Archia
+//  - Domaine Text
+//  - PP Object Sans
+//
+//
+
+
+// # Fonts: Archia
+// ==========================================================================
+@font-face {
+    font-family: 'Archia';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/6053319f6f84de1e70cbd2f9_archia-thin-webfont.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605331aad6b0a9e050566b47_archia-light-webfont.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605331b2ce733b80e3676c17_archia-regular-webfont.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605331bb2f834f700b9b6eac_archia-medium-webfont.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605331c3ec745193928de0fe_archia-semibold-webfont.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605331cba87963eaceebd916_archia-bold-webfont.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+// # Fonts: Domaine Text
+// ==========================================================================
+@font-face {
+    font-family: 'Domaine Text';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605f4ccc07f53655fbc846b2_domaine-text-web-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Domaine Text';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605f4ccb5f98872c3f9fe0ca_domaine-text-web-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Domaine Text';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605f4ccb7fdaa460ae5bd420_domaine-text-web-medium-italic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Domaine Text';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605f4ccc150ebebfcce5412f_domaine-text-web-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Domaine Text';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/605f4ccc34d3b8bdddba6493_domaine-text-web-regular-italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+// # Fonts: PP Object Sans
+// ==========================================================================
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e0541429b40dc225963_PPObjectSans-Black.woff') format('woff'), url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06044fe56a7a403f02_PPObjectSans-Heavy.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e05f8ed707c6f3f0cc8_PPObjectSans-BlackSlanted.woff') format('woff'), url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06b9210632dba65fc0_PPObjectSans-HeavySlanted.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06044fe5ec29403f00_PPObjectSans-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06102650c66eb68069_PPObjectSans-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06b88d132e6b09be93_PPObjectSans-BoldSlanted.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e0690cffa2f29d776cf_PPObjectSans-LightSlanted.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e07f21278755763c654_PPObjectSans-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e07865f6c5cae91e18b_PPObjectSans-ThinSlanted.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e07a809c16cbad6047f_PPObjectSans-MediumSlanted.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06ee8f265044766227_PPObjectSans-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e06b8171f2319d131f0_PPObjectSans-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Object Sans';
+    src: url('https://uploads-ssl.webflow.com/5fc6b6c9b4295a89cef9f9ac/62c55e090a1e075d619b5584_PPObjectSans-Slanted.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
