@@ -18,11 +18,12 @@ function CreateModal() {
         <aside 
             role="dialog" 
             className={`
-                fixed top-0 right-0 bottom-0 left-0 m-auto z-50 bg-black/50
-                ${modalContext.isOpen ? 'visible' : 'hidden'} 
+                fixed top-0 right-0 bottom-0 left-0 z-50 
+                m-auto opacity-0 bg-black/50
+                ${modalContext.isOpen ? 'visible animate-open' : 'hidden'} 
             `}
         >
-            <div className="m-auto relative translate-y-1/2">
+            <div className="flex m-auto relative h-full w-full items-center">
                 {modalOptions[modalData.type]}
             </div>
         </aside>

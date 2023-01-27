@@ -8,11 +8,14 @@
 // - Kind: Solid, Outline, Ghost
 //
 
+
 .button {
     color: white;
-    padding: 10px 21px;
-    font-weight: bold;
+    padding: 16px 21px;
+    font-weight: medium;
     border-radius: 3px;
+    font-size: 14px;
+    line-height: 1;
 
     &.button-md {
 

@@ -1,3 +1,29 @@
 // ==========================================================================
 // # Cheat Styles - Hot fixes and quick code; don't forget to refactor
 // ==========================================================================
+
+.card-number-mask::before {
+    content: attr(data-card-number);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    color: #000;
+    text-align: center;
+    pointer-events: none;
+  }
+
+.animate-open {
+    @apply opacity-100 transition-opacity duration-500 ease-out;
+}
+
+
+.card-label {
+    &::after {
+        content: attr(data-max);
+        visibility: hidden;
+        height: 0;
+    }
+}

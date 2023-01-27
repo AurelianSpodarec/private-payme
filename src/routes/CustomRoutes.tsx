@@ -1,17 +1,26 @@
+import React, { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 
-import Home from "views/pages/Home";
-import NotFound from "views/pages/NotFound";
+const Home = React.lazy(() => import("views/pages/Home"));
+const NotFound = React.lazy(() => import("views/pages/NotFound"));
 
 function CustomRoutes() {
     let routes = useRoutes([
         {
             path: "*",
-            element: <NotFound />
+            element: (
+                <Suspense fallback={<div>Loading...</div>}>
+                    <NotFound />
+                </Suspense>
+            )
         },
         {
             path: "/",
-            element: <Home />
+            element: (
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Home />
+                </Suspense>
+            )
         }
     ]);
 
