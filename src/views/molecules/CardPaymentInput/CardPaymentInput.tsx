@@ -25,7 +25,18 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
 
     // EVENT HANDLERS
     // =======================================================
-
+    function maskInitial12Chars(value: string) {
+        let maskedValue = "";
+        for (let i = 0; i < value.length; i++) {
+            if (i < 12) {
+                maskedValue += "*";
+            } else {
+                maskedValue += value[i];
+            }
+        }
+        return maskedValue;
+    }
+    
     function handleCardNumberChange(e: any) {
         console.log("cacacacc", e.target.selectionStart)
         let inputValue = e.target.value;
@@ -36,8 +47,8 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
         if(inputValue.length > 16) {
             inputValue = inputValue.substring(0, 16);
         }
-        
         let formattedCardNumber = cardPaymentHelper.formatCardNumber(inputValue);
+ 
         if(formattedCardNumber) {
             setCardNumber(formattedCardNumber);
             cardNumberInputProps.onChange(e);
@@ -143,8 +154,7 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
                 </label>
             </div>
 
-            {/* {validateCardNumber(cardNumber) ? "valid card number" : "invalid card number"} */}
-            {/* <div className="text-red-500">
+            {/* <div className="bg-red-500">
                 ERROR
             </div> */}
 

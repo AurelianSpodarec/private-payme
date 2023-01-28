@@ -21,9 +21,9 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
     const userInfo = fields[0]
     const form = useForm(null, {
         // card: {
-            number: null,
-            expiry: "0632",
-            cvc: "000",
+            number: "",
+            expiry: "",
+            cvc: "",
         // },
         address_one: userInfo.address_one,
         address_two: userInfo.address_two,
@@ -115,6 +115,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                 <Select 
                     id="country"
                     name="country"
+                    placeholder="Country"
                     data={countryList} 
                     onValueChange={(e:any) => console.log(e)}  
                 />

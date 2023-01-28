@@ -22,10 +22,12 @@ function ModalProvider({ children }: {children: ReactNode}) {
 
     function setModalOpen() {
         setIsOpen(true)
+        document.body.style.overflow = 'hidden';
     }
 
     function setModalClose() {
         setIsOpen(false)
+        document.body.style.overflow = 'auto';
     }
 
     function onValueChange(e:any) {
