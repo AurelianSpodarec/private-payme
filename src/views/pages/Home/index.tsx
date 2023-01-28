@@ -30,7 +30,18 @@ function Home() {
 
  
     return (
-        <div className="p-8">
+        <div className="">
+
+            {/* <div>
+            <h1>Do you feel malicious today? Update a detective's payment details at random! 
+                <Button>Random Update</Button>
+            </h1>
+            </div> */}
+
+            <section className="bg-[#f2efe9] py-20">
+
+                The hard way to deal with criminals
+            </section>
 
             <section className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
 
@@ -105,6 +116,16 @@ function Home() {
 
                 </div>
                 </section> */}
+
+                <section className="bg-black p-10 ">
+                    <div className="max-w-[580px] h-[220px] mx-auto text-center text-white flex flex-col items-center ">
+                        <p className="text-2xl font-light mb-5">“For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about.”</p>
+                        <div className="flex flex-col">
+                            <span className="text-sm">Asthley Kooupierman</span>
+                            <a href="#" className="font-medium underline text-sm">AmbitonCord</a>
+                        </div>
+                    </div>
+                </section>
  
         </div>
     )
