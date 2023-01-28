@@ -1,22 +1,59 @@
 import { useAuth } from "context/authContext";
 import useModal from "context/useModal";
 import { useEffect, useState } from "react";
+import { getOfficerList } from "services/portaire/api/officers/officers";
 import Button from "views/atoms/Button/Button";
 import Quote from "views/molecules/Quote";
+import { Container } from "views/_ui";
 
 
-function Home() {
+function OfficerListItem({officer, onClickDelete, onClickUpdate}:any) {
+    return (
+    <article className="md:flex md:items-center md:justify-between md:space-x-5">
+
+        <div className="flex items-center space-x-5">
+        <div className="flex-shrink-0">
+            <div className="relative">
+            <img
+                className="h-16 w-16 object-cover rounded-full"
+                src="https://i.guim.co.uk/img/media/ffc016b01f45eeec94ff69dc59eb65a9137ae52a/0_95_3500_2101/master/3500.jpg?width=1200&quality=85&auto=format&fit=max&s=dda2e0a55ff16a86bc1d7dc6cb86f0b1"
+                alt=""
+            />
+            <span className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true" />
+            </div>
+        </div>
+        <div>
+            <h1 className="text-2xl font-bold text-gray-900">{officer.first_name} {officer.last_name}</h1>
+            <p className="text-sm font-medium text-gray-500">
+                Consulting detective -
+                <time dateTime="2020-12-20">December 20, 1887</time>
+            </p>
+        </div>
+        </div>
+
+        <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">   
+            {/* <Button kind="outline" onClick={() => openModalDeletePayment()}>Delete Payment</Button>  */}
+            {/* <Button onClick={() => openModalUpdatePayment()}>Update Payment</Button> */}
+            hi
+        </div>
+
+    </article>
+    )
+}
+
+function OfficerListIndex({ items }: any) {
+
     const AuthContextAPI = useAuth();
     const ModalContextAPI = useModal()
-    
-    const User = AuthContextAPI.authData.user;
+
+    const user = AuthContextAPI.authData.user;
 
     function openModalUpdatePayment() {
         ModalContextAPI.open()
         ModalContextAPI.setConfig({
             type: "payment",
             option: "update",
-            fields: [{...User}] 
+            fields: [{...user}] 
         })
     }
 
@@ -25,10 +62,29 @@ function Home() {
         ModalContextAPI.setConfig({
             type: "payment",
             option: "delete",
-            fields: [{...User}] 
+            fields: [{...user}] 
         })
     }
+    console.log("hii", items)
 
+    return items.length !== 0 && items.map((item: any) => (
+        <OfficerListItem key={item._id} officer={item} />
+    ));
+}
+
+function Home() {
+
+    const [officerList, setOfficerList] = useState([])
+
+    async function fetchOfficerList() {
+        const res = await getOfficerList()
+        console.log("ressssss", res)
+        setOfficerList(res)
+    }
+
+    useEffect(() => {
+        fetchOfficerList()
+    }, [])
  
     return (
         <div className="">
@@ -44,85 +100,26 @@ function Home() {
                 The hard way to deal with criminals
             </section>
 
-            <section className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
 
-                <div className="flex items-center space-x-5">
-                <div className="flex-shrink-0">
-                    <div className="relative">
-                    <img
-                        className="h-16 w-16 object-cover rounded-full"
-                        src="https://i.guim.co.uk/img/media/ffc016b01f45eeec94ff69dc59eb65a9137ae52a/0_95_3500_2101/master/3500.jpg?width=1200&quality=85&auto=format&fit=max&s=dda2e0a55ff16a86bc1d7dc6cb86f0b1"
-                        alt=""
-                    />
-                    <span className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true" />
-                    </div>
+            <Container className="max-w-7xl">
+                <header>
+                <div className="h-[1px] bg-[#111] mb-5 w-full"></div>
+                <div className="flex justify-between items-center mb-5">
+                    <h2 className="text-2xl font-medium uppercase">Officers</h2>
+                    <Button>View All</Button>
                 </div>
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900">{User.first_name} {User.last_name}</h1>
-                    <p className="text-sm font-medium text-gray-500">
-                        Consulting detective -
-                        <time dateTime="2020-12-20">December 20, 1887</time>
-                    </p>
-                </div>
-                </div>
+                </header>
 
-                <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">   
-                    <Button kind="outline" onClick={() => openModalDeletePayment()}>Delete Payment</Button> 
-                    <Button onClick={() => openModalUpdatePayment()}>Update Payment</Button>
-                </div>
+                <OfficerListIndex items={officerList} />
+            </Container>
 
-            </section>
-
-{/* 
-            <section aria-labelledby="applicant-information-title w-full">
-                <div className="bg-white shadow sm:rounded-lg w-full">
-
-                    <div className="px-4 py-5 sm:px-6">
-                        <h2 id="applicant-information-title" className="text-lg font-medium leading-6 text-gray-900">
-                            Detective Information
-                        </h2>
-                        <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and payment</p>
-                    </div>
-
-                    <div className="border-t border-gray-200 px-4 py-5 sm:px-6 w-full">
-                    <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                        <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Address One</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{User.address_one}</dd>
-                        </div>
-
-                        <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Address Two</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{User.address_two}</dd>
-                        </div>
-
-                        <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Country</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{User.country === " " ? "Set Country" : User.country}</dd>
-                        </div>
-
-                        <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">State</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{User.state}</dd>
-                        </div>
-
-                        <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Email Address</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{User.email}</dd>
-                        </div>
- 
-                        
-                    </dl>
-                    </div>
-
-                </div>
-                </section> */}
-
+            <Container className="max-w-7xl">
                 <Quote 
                     quote="For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about." 
                     author="Asthley Kooupierman"
                     company={{name: "AmbitonCord", "link": "#"}}
                 />
+            </Container>
  
         </div>
     )
