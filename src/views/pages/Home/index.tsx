@@ -2,6 +2,7 @@ import { useAuth } from "context/authContext";
 import useModal from "context/useModal";
 import { useEffect, useState } from "react";
 import Button from "views/atoms/Button/Button";
+import Quote from "views/molecules/Quote";
 
 
 function Home() {
@@ -117,15 +118,11 @@ function Home() {
                 </div>
                 </section> */}
 
-                <section className="bg-black p-10 ">
-                    <div className="max-w-[580px] h-[220px] mx-auto text-center text-white flex flex-col items-center ">
-                        <p className="text-2xl font-light mb-5">“For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about.”</p>
-                        <div className="flex flex-col">
-                            <span className="text-sm">Asthley Kooupierman</span>
-                            <a href="#" className="font-medium underline text-sm">AmbitonCord</a>
-                        </div>
-                    </div>
-                </section>
+                <Quote 
+                    quote="For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about." 
+                    author="Asthley Kooupierman"
+                    company={{name: "AmbitonCord", "link": "#"}}
+                />
  
         </div>
     )
