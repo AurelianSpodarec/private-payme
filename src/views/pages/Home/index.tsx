@@ -11,6 +11,7 @@ import Heading from "views/molecules/Heading";
 import Quote from "views/molecules/Quote";
 
 import DetectiveListIndex from "../Detective/_components/DetectiveListIndex";
+import Tawk from "views/atoms/Tawk";
 
 const randomDetectivesList = [
     {"_id":"63d2b04dfsdg4f4rrff97cb2", "avatar": { "src": "https://i.guim.co.uk/img/media/4eb3231a2d6053a4923e5b9c022d5f470b9080a9/0_591_2417_1450/master/2417.jpg?width=465&quality=85&dpr=1&s=none", "alt": ""}, "email":"jamesbond@mi5.co.uk","first_name":"James","last_name":"Bond","address_one":"CLASSIFIED","address_two":"CLASSIFIED","state":"London","post_code":"CLASSIFIED","active": false, "__v":0},
@@ -53,15 +54,16 @@ function Home() {
                 <Button>Random Update</Button>
             </h1>
             </div> */}
-
+           
             <Section className="bg-[#f2efe9] py-20 mx-7 my-10 mb-5 relative">
             <Container className="py-28 px-44">
+
 
                 <div className="flex flex-row">
                     <div className="max-w-[550px]">
 
                     <h1 className="text-5xl text-black mb-3">The easy way to become an agent.</h1>
-                    <p className="text-xl font-light mb-5">Accelerate world peace and boost governament power by becoming one of the agents to work on classified operations inside the Matrix</p>
+                    <p className="text-xl font-light mb-5">Accelerate world peace and boost governament power by becoming one of the greatest agents and work on classified operations inside the Matrix</p>
                     <Button onClick={() => handleClick()} className="mb-5">Update Payment --{`>`}</Button>
 
                     <ul className="flex flex-col">
@@ -127,9 +129,9 @@ function Home() {
             </Section>
 
 
-            <Section id="detectives" className="my-10">
+            <Section id="detectives" className="my-24">
             <Container className="max-w-7xl">
-
+          
                 <Heading title="Detectives" />
                 <DetectiveListIndex items={detectiveList} />
 
@@ -138,7 +140,7 @@ function Home() {
 
 
             <Section className="my-5 pt-10">
-            <Container className="max-w-7xl">
+            <Container className="max-w-8xl px-7">
                 <Quote 
                     quote="For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about." 
                     author="Asthley Kooupierman"
@@ -146,6 +148,9 @@ function Home() {
                 />
             </Container>
             </Section>
+
+
+            <Tawk />
  
         </div>
     )

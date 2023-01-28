@@ -27,7 +27,7 @@ function DetectiveListItem({ detective }:DetectiveListItemProps) {
     }
 
     return (
-    <article className={`transition duration-200 ease-in-out md:flex md:items-center md:justify-between md:space-x-5 p-5 rounded-md ${isActive  ? "cursor-pointer hover:bg-[#f2efe9]" : "opacity-50 cursor-not-allowed"}`}>
+    <article className={`transition duration-200 ease-in-out bg-[#f2efe9]/80 md:flex md:items-center md:justify-between md:space-x-5 p-5 rounded-md ${isActive  ? "cursor-pointer hover:bg-[#f2efe9]" : "opacity-50 cursor-not-allowed"}`}>
 
         <div className="flex items-center space-x-5">
         <div className="flex-shrink-0">
