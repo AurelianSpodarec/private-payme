@@ -13,7 +13,9 @@ module.exports = {
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
     ],
-    safelist: [],
+    safelist: [
+        'opacity-100'
+    ],
     theme: {
         extend: {
             colors: {

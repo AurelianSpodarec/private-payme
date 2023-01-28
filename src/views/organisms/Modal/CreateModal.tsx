@@ -14,7 +14,7 @@ function CreateModal() {
     const modalData = modalContext.data;
 
     const modalOptions:any = {
-        payment: <ModalPayment config={modalData}/>,
+        payment: <ModalPayment config={modalData} />,
         // configm: <ModalConfirm config={modalData} />
     }
 
@@ -36,3 +36,7 @@ function CreateModal() {
 }
 
 export default CreateModal;
+
+    // transform: scale(0.8);
+    // opacity: 0;
+    // transition: 200ms ease-in-out;
