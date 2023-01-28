@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <header className="w-full bg-[#f9f8f5] sticky top-0 h-20">
+        <header className="w-full bg-[#f9f8f5] sticky top-0 h-20 z-40">
         <div className="flex items-center align-center justify-between h-full">
             {/* Imaginary Header */}
 

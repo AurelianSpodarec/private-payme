@@ -15,6 +15,8 @@
         block,
         icon,
         iconPosition,
+        className,
+        style,
     } = props;
 
     const prefix = "button";
@@ -27,9 +29,11 @@
             href={href}
             type={type}
             ref={ref}
+            style={style}
             onClick={onClick}
             disabled={disabled}
             className={`
+                ${className}
                 ${block ? 'w-full' : ""}
                 ${prefix} ${kind ? `${prefix}-${kind}` : ''} 
                 ${variant ? `${prefix}-${variant}` : ''} 
@@ -71,7 +75,7 @@ interface ButtonProps {
     active?: boolean;
     disabled?: boolean;
     isLoading?: boolean;
-
+    style?: any;
     icon?: any;
     iconPosition?: any;
 }

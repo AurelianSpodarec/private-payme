@@ -13,8 +13,8 @@ function Layout() {
 
             <CreateModal />
 
+            <Header />
             <div className="flex flex-col h-full overflow-hidden">
-                <Header />
 
                 <main className="w-full h-full">
                     <CustomRoutes />

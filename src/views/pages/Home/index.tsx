@@ -12,6 +12,10 @@ import Quote from "views/molecules/Quote";
 
 import DetectiveListIndex from "../Detective/_components/DetectiveListIndex";
 
+const randomDetectivesList = [
+    {"_id":"63d2b04dfsdg4f4rrff97cb2", "avatar": { "src": "https://i.guim.co.uk/img/media/4eb3231a2d6053a4923e5b9c022d5f470b9080a9/0_591_2417_1450/master/2417.jpg?width=465&quality=85&dpr=1&s=none", "alt": ""}, "email":"jamesbond@mi5.co.uk","first_name":"James","last_name":"Bond","address_one":"CLASSIFIED","address_two":"CLASSIFIED","state":"London","post_code":"CLASSIFIED","active": false, "__v":0},
+    {"_id":"63d2b028334rfffgfer34442", "avatar": { "src": "https://static01.nyt.com/images/2011/06/25/arts/25falk-span/25falk-span-articleLarge.jpg?quality=75&auto=webp&disable=upscale", "alt": ""}, "email":"john@doe.com","first_name":"Peter","last_name":"Falk","address_one":"221b Baker St","address_two":"London","state":"London","post_code":"NW1 6XE","active": false, "__v":0}
+]
 
 function Home() {
 
@@ -21,17 +25,21 @@ function Home() {
         const res:any = await getDetectiveList()
         res[0].avatar = {
             src: "https://i.guim.co.uk/img/media/ffc016b01f45eeec94ff69dc59eb65a9137ae52a/0_95_3500_2101/master/3500.jpg?width=1200&quality=85&auto=format&fit=max&s=dda2e0a55ff16a86bc1d7dc6cb86f0b1",
-            alt: "Pictureof Sherlok"
+            alt: "Picture of Sherlok"
         }
-        console.log("ressssss", res)
 
-        const randomData = [
-            {"_id":"63d2b04dfsdg4f4rrff97cb2", "avatar": { "src": "https://i.guim.co.uk/img/media/4eb3231a2d6053a4923e5b9c022d5f470b9080a9/0_591_2417_1450/master/2417.jpg?width=465&quality=85&dpr=1&s=none", "alt": ""}, "email":"jamesbond@mi5.co.uk","first_name":"James","last_name":"Bond","address_one":"CLASSIFIED","address_two":"CLASSIFIED","state":"London","post_code":"CLASSIFIED","active": false, "__v":0},
-            {"_id":"63d2b028334rfffgfer34442", "avatar": { "src": "https://static01.nyt.com/images/2011/06/25/arts/25falk-span/25falk-span-articleLarge.jpg?quality=75&auto=webp&disable=upscale", "alt": ""}, "email":"john@doe.com","first_name":"Peter","last_name":"Falk","address_one":"221b Baker St","address_two":"London","state":"London","post_code":"NW1 6XE","active": false, "__v":0}
-        ]
-
-        setDetectiveList([...randomData, res[0]].reverse())
+        setDetectiveList([...randomDetectivesList, res[0]].reverse())
     }
+
+    const handleClick = () => {
+        const sectionDiv = document.getElementById("detectives");
+        const top = sectionDiv?.getBoundingClientRect().top;
+        window.scrollTo({
+            top: top,
+            behavior: 'smooth'
+        });
+    };
+    
 
     useEffect(() => {
         fetchOfficerList()
@@ -46,16 +54,42 @@ function Home() {
             </h1>
             </div> */}
 
-            <Section className="bg-[#f2efe9] py-20 mx-7 my-10 mb-5 h-[400px]">
-            <Container className="">
+            <Section className="bg-[#f2efe9] py-20 mx-7 my-10 mb-5 relative">
+            <Container className="py-28 px-44">
 
-                <h1 className="text-5xl text-black">The hard way to deal with criminals</h1>
+                <div className="flex flex-row">
+                    <div className="max-w-[550px]">
 
+                    <h1 className="text-5xl text-black mb-3">The easy way to become an agent.</h1>
+                    <p className="text-xl font-light mb-5">Accelerate world peace and boost governament power by becoming one of the agents to work on classified operations inside the Matrix</p>
+                    <Button onClick={() => handleClick()} className="mb-5">Update Payment --{`>`}</Button>
+
+                    <ul className="flex flex-col">
+                        <li className="flex flex-row items-center align-center space-x-2">
+                            <svg className="w-4" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m32.148 92.809-30.77-26.809c-1.6836-1.4609-1.8633-4.0117-0.40234-5.6953 1.4609-1.6836 4.0078-1.8672 5.6953-0.40625l24.609 21.48 61.629-72.77c1.4375-1.6953 3.9727-1.9062 5.668-0.46875 1.6992 1.4336 1.9062 3.9727 0.47266 5.668z"/>
+                            </svg>
+                            <span className="text-sm">No training required</span>
+                        </li>
+                        <li className="flex flex-row items-center align-center space-x-2">
+                            <svg className="w-4" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m32.148 92.809-30.77-26.809c-1.6836-1.4609-1.8633-4.0117-0.40234-5.6953 1.4609-1.6836 4.0078-1.8672 5.6953-0.40625l24.609 21.48 61.629-72.77c1.4375-1.6953 3.9727-1.9062 5.668-0.46875 1.6992 1.4336 1.9062 3.9727 0.47266 5.668z"/>
+                            </svg>
+                            <span className="text-sm">No limit on amunition</span>
+                        </li>
+                    </ul>
+                    </div>
+                   
+                    <div>
+                        {/* <img className="absolute -bottom-[0] opacity-95 -right-[150px] w-[950px]" src="https://png2.cleanpng.com/sh/819a22ce29701f1991b87482b5114fea/L0KzQYm3V8EzN6JvkpH0aYP2gLBuTgNkfZ11jOd7ZT33db3slvl0cZDzRed5bHBkdH7tjB51NaV3jdc2ZHX3dbT7igZmNWZnTKo6YknpQoHqVcU6NmE9UaM6OES5QYa6UcQ2OmQ2UaM8NEKxgLBu/kisspng-sculpture-television-upload-font-true-detective-5b481b9f20c559.0891184615314523191342.png" alt="Man face" /> */}
+                        <img className="absolute -bottom-[245px] opacity-95 -right-[180px] w-[650px]" src="https://i.imgur.com/lznLsVL.png" alt="Man face" />
+                    </div>
+                </div>
             </Container>
             </Section>
 
           
-            <Section className="py-4">
+            <Section className="pt-12 pb-4">
             <Container>
 
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-6">
@@ -93,9 +127,7 @@ function Home() {
             </Section>
 
 
-
-
-            <Section className="my-10">
+            <Section id="detectives" className="my-10">
             <Container className="max-w-7xl">
 
                 <Heading title="Detectives" />
@@ -104,7 +136,8 @@ function Home() {
             </Container>
             </Section>
 
-            <Section className="my-5">
+
+            <Section className="my-5 pt-10">
             <Container className="max-w-7xl">
                 <Quote 
                     quote="For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about." 

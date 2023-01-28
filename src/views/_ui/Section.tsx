@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-function Section({ className, style, children, size }: SectionProps) {
+function Section({ className, style, children, size, id }: SectionProps) {
     const options = {
         fluid: 'fluid',
         sm: 'sm',
@@ -15,6 +15,7 @@ function Section({ className, style, children, size }: SectionProps) {
     return (
         <section
             style={style}
+            id={id}
             // className={`section
             //  ${className ? className : ''} ${
             //     size ? `section--${options[size]}` : `section--${options.base}`
@@ -30,6 +31,7 @@ export default Section;
 
 interface SectionProps {
     className?: string;
+    id?: string;
     style?: object;
     children: ReactNode;
     size?: 'fluid' | 'sm' | 'base' | 'xs' | 'md' | 'lg' | 'xl' | '2xl';
