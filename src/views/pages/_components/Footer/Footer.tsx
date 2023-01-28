@@ -5,7 +5,7 @@ function Footer() {
         <footer>
 
         <div>
-            Curated weapons for curious military
+            Curated weapons for military in need
             <Button>Become a supplier</Button>
         </div>
 

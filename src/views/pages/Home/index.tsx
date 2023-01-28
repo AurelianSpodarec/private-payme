@@ -1,85 +1,36 @@
+import { useEffect, useState } from "react";
+
 import { useAuth } from "context/authContext";
 import useModal from "context/useModal";
-import { useEffect, useState } from "react";
-import { getOfficerList } from "services/portaire/api/officers/officers";
+
+import { getDetectiveList } from "services/portaire/api/detective/detective";
+
+import { Container, Section } from "views/_ui";
 import Button from "views/atoms/Button/Button";
+import Heading from "views/molecules/Heading";
 import Quote from "views/molecules/Quote";
-import { Container } from "views/_ui";
 
+import DetectiveListIndex from "../Detective/_components/DetectiveListIndex";
 
-function OfficerListItem({officer, onClickDelete, onClickUpdate}:any) {
-    return (
-    <article className="md:flex md:items-center md:justify-between md:space-x-5">
-
-        <div className="flex items-center space-x-5">
-        <div className="flex-shrink-0">
-            <div className="relative">
-            <img
-                className="h-16 w-16 object-cover rounded-full"
-                src="https://i.guim.co.uk/img/media/ffc016b01f45eeec94ff69dc59eb65a9137ae52a/0_95_3500_2101/master/3500.jpg?width=1200&quality=85&auto=format&fit=max&s=dda2e0a55ff16a86bc1d7dc6cb86f0b1"
-                alt=""
-            />
-            <span className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true" />
-            </div>
-        </div>
-        <div>
-            <h1 className="text-2xl font-bold text-gray-900">{officer.first_name} {officer.last_name}</h1>
-            <p className="text-sm font-medium text-gray-500">
-                Consulting detective -
-                <time dateTime="2020-12-20">December 20, 1887</time>
-            </p>
-        </div>
-        </div>
-
-        <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">   
-            {/* <Button kind="outline" onClick={() => openModalDeletePayment()}>Delete Payment</Button>  */}
-            {/* <Button onClick={() => openModalUpdatePayment()}>Update Payment</Button> */}
-            hi
-        </div>
-
-    </article>
-    )
-}
-
-function OfficerListIndex({ items }: any) {
-
-    const AuthContextAPI = useAuth();
-    const ModalContextAPI = useModal()
-
-    const user = AuthContextAPI.authData.user;
-
-    function openModalUpdatePayment() {
-        ModalContextAPI.open()
-        ModalContextAPI.setConfig({
-            type: "payment",
-            option: "update",
-            fields: [{...user}] 
-        })
-    }
-
-    function openModalDeletePayment() {
-        ModalContextAPI.open()
-        ModalContextAPI.setConfig({
-            type: "payment",
-            option: "delete",
-            fields: [{...user}] 
-        })
-    }
-    console.log("hii", items)
-
-    return items.length !== 0 && items.map((item: any) => (
-        <OfficerListItem key={item._id} officer={item} />
-    ));
-}
 
 function Home() {
 
-    const [officerList, setOfficerList] = useState([])
+    const [detectiveList, setDetectiveList]:any = useState([])
 
     async function fetchOfficerList() {
-        const res = await getOfficerList()
+        const res:any = await getDetectiveList()
+        res[0].avatar = {
+            src: "https://i.guim.co.uk/img/media/ffc016b01f45eeec94ff69dc59eb65a9137ae52a/0_95_3500_2101/master/3500.jpg?width=1200&quality=85&auto=format&fit=max&s=dda2e0a55ff16a86bc1d7dc6cb86f0b1",
+            alt: "Pictureof Sherlok"
+        }
         console.log("ressssss", res)
-        setOfficerList(res)
+
+        const randomData = [
+            {"_id":"63d2b04dfsdg4f4rrff97cb2", "avatar": { "src": "https://i.guim.co.uk/img/media/4eb3231a2d6053a4923e5b9c022d5f470b9080a9/0_591_2417_1450/master/2417.jpg?width=465&quality=85&dpr=1&s=none", "alt": ""}, "email":"jamesbond@mi5.co.uk","first_name":"James","last_name":"Bond","address_one":"CLASSIFIED","address_two":"CLASSIFIED","state":"London","post_code":"CLASSIFIED","active": false, "__v":0},
+            {"_id":"63d2b028334rfffgfer34442", "avatar": { "src": "https://static01.nyt.com/images/2011/06/25/arts/25falk-span/25falk-span-articleLarge.jpg?quality=75&auto=webp&disable=upscale", "alt": ""}, "email":"john@doe.com","first_name":"Peter","last_name":"Falk","address_one":"221b Baker St","address_two":"London","state":"London","post_code":"NW1 6XE","active": false, "__v":0}
+        ]
+
+        setDetectiveList([...randomData, res[0]].reverse())
     }
 
     useEffect(() => {
@@ -95,24 +46,65 @@ function Home() {
             </h1>
             </div> */}
 
-            <section className="bg-[#f2efe9] py-20">
+            <Section className="bg-[#f2efe9] py-20 mx-7 my-10 mb-5 h-[400px]">
+            <Container className="">
 
-                The hard way to deal with criminals
-            </section>
+                <h1 className="text-5xl text-black">The hard way to deal with criminals</h1>
 
-
-            <Container className="max-w-7xl">
-                <header>
-                <div className="h-[1px] bg-[#111] mb-5 w-full"></div>
-                <div className="flex justify-between items-center mb-5">
-                    <h2 className="text-2xl font-medium uppercase">Officers</h2>
-                    <Button>View All</Button>
-                </div>
-                </header>
-
-                <OfficerListIndex items={officerList} />
             </Container>
+            </Section>
 
+          
+            <Section className="py-4">
+            <Container>
+
+                <div className="grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-6">
+                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                        <img className="h-12" src="https://global-uploads.webflow.com/5fc6b6c9b4295a89cef9f9ac/633ee1596c0915db93edd76f_Diespeker_logo_keyline-p-500.png" alt="Tuple" />
+                    </div>
+                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                        <img className="h-12" src="https://global-uploads.webflow.com/5fc6b6c9b4295a89cef9f9ac/6143431faac85f1e24305c48_pouredproject.png" alt="Tuple" />
+                    </div>
+
+                  
+                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <img className="h-12" src="https://global-uploads.webflow.com/5fc6b6c9b4295a89cef9f9ac/633ee15a8e3c6a633a725881_maria%20starling.png" alt="Mirage" />
+                    </div>
+                    <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                    <img className="h-12" src="https://global-uploads.webflow.com/5fc6b6c9b4295a89cef9f9ac/633ee159eb698e476ff7cf87_decoralogobig-p-500.png" alt="StaticKit" />
+                    </div>
+                    <div className="col-span-1 flex justify-center md:col-span-3 lg:col-span-1">
+                    <img
+                        className="h-12"
+                        src="https://global-uploads.webflow.com/5fc6b6c9b4295a89cef9f9ac/633ee15ab95156377b5892d7_Tim%20Page%20Carpets.png"
+                        alt="Transistor"
+                    />
+                    </div>
+                    <div className="col-span-2 flex justify-center md:col-span-3 lg:col-span-1">
+                    <img
+                        className="h-12"
+                        src="https://global-uploads.webflow.com/5fc6b6c9b4295a89cef9f9ac/633ee1594030c41a7a782038_Holmes%20Bespoke.png"
+                        alt="Workcation"
+                    />
+                    </div>
+                </div>
+               
+            </Container>
+            </Section>
+
+
+
+
+            <Section className="my-10">
+            <Container className="max-w-7xl">
+
+                <Heading title="Detectives" />
+                <DetectiveListIndex items={detectiveList} />
+
+            </Container>
+            </Section>
+
+            <Section className="my-5">
             <Container className="max-w-7xl">
                 <Quote 
                     quote="For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about." 
@@ -120,6 +112,7 @@ function Home() {
                     company={{name: "AmbitonCord", "link": "#"}}
                 />
             </Container>
+            </Section>
  
         </div>
     )
