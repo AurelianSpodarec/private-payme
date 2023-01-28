@@ -7,13 +7,14 @@ import ModalFooter from '../../_components/ModalFooter';
 import ModalContent from '../../_components/ModalContent/ModalContent';
 import ModalCard from '../../_components/ModalCard';
 import ModalForm from '../../_components/ModalContent/ModalForm';
+import { capitalizeFirstLetter } from 'utils/common';
 
 
 
 function ModalDeletePayment({config}:ModalDeletePaymentProps) {
     const { id, type, title, description, onAction, option, fields } = config;
     
-    // const modalContext = useModal()
+    const modalContext = useModal()
 
     const userInfo = fields[0]
    
@@ -30,10 +31,10 @@ function ModalDeletePayment({config}:ModalDeletePaymentProps) {
     //     modalContext.close()
     // }
 
-    // function handleCancel(e:any) {
-    //     e.preventDefault()
-    //     modalContext.close()
-    // }
+    function handleCancel(e:any) {
+        e.preventDefault()
+        modalContext.close()
+    }
 
    
     return (
@@ -44,6 +45,8 @@ function ModalDeletePayment({config}:ModalDeletePaymentProps) {
             <span className="font-semibold">
             {" "}{userInfo.first_name} {userInfo.last_name}
             </span>
+
+            <ModalFooter actionTitle={`${capitalizeFirstLetter(option)}`} handleCancel={handleCancel} />
         </>
     )
 }

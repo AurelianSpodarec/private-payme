@@ -9,6 +9,8 @@ import Select from "views/atoms/Select/Select";
 
 import CardPaymentInput from "views/molecules/CardPaymentInput/CardPaymentInput";
 import ModalRow from '../../_components/ModalContent/ModalRow';
+import ModalFooter from '../../_components/ModalFooter';
+import { capitalizeFirstLetter } from 'utils/common';
 
 
 function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
@@ -160,9 +162,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
             </div>
             </div>
 
-{/* 
-                <ModalFooter actionTitle={"Update"} handleCancel={handleCancel} /> */}
-       
+            <ModalFooter actionTitle={`${capitalizeFirstLetter(option)}`} handleCancel={handleCancel} />
         </form>
     )
 }

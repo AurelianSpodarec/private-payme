@@ -17,9 +17,9 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
     // HELPERS
     // =======================================================
     function handleCardNumberFocus(e: any) {
-        let cursorPos = e.target.selectionStart;
-        e.target.setSelectionRange(cursorPos, cursorPos);
-        setCursorPosition(cursorPos);
+        let cursorPosition = e.target.selectionStart;
+        e.target.setSelectionRange(cursorPosition, cursorPosition);
+        setCursorPosition(cursorPosition);
     }
 
 
@@ -27,21 +27,21 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
     // =======================================================
 
     function handleCardNumberChange(e: any) {
+        console.log("cacacacc", e.target.selectionStart)
         let inputValue = e.target.value;
-        let cursorPos = e.target.selectionStart;
+        let currentCursorPos = e.target.selectionStart;
 
-        setCursorPosition(cursorPos);
-        if (e.keyCode === 8) {
-            inputValue = inputValue.slice(0, -1);
-        }
+    
         inputValue = inputValue.replace(/\s/g,'');
         if(inputValue.length > 16) {
             inputValue = inputValue.substring(0, 16);
         }
+        
         let formattedCardNumber = cardPaymentHelper.formatCardNumber(inputValue);
         if(formattedCardNumber) {
             setCardNumber(formattedCardNumber);
-            cardNumberInputProps.onChange(formattedCardNumber);
+            cardNumberInputProps.onChange(e);
+            setCursorPosition(currentCursorPos);
         }
     }
 
@@ -72,6 +72,11 @@ function CardPaymentInput({cardNumberInputProps, cardExpiryInputProps, cardCVCIn
         setCardExpiry(cardPaymentHelper.formatCardExpiry(cardExpiryInputProps.value));
         setCardCVC(cardPaymentHelper.formatCVC(cardCVCInputProps.value));
     }
+    useEffect(() => {
+        let inputEl = document.getElementById(cardNumberInputProps.name) as HTMLInputElement;
+        inputEl.setSelectionRange(cursorPosition, cursorPosition);
+
+    }, [cursorPosition, cardNumberInputProps.name])
 
     useEffect(() => {
         if(cardNumberInputProps.value === "") return

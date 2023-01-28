@@ -68,12 +68,14 @@ function ModalPayment({config}:ModalPaymentProps) {
         <ModalCard>
             <ModalHeader title={`${capitalizeFirstLetter(option)} payment`} />
          
-            <ModalForm onSubmitForm={(e:any) => submitForm(e)}>
+            <div>
+            {/* <ModalForm onSubmitForm={(e:any) => submitForm(e)}> */}
                 <ModalContent> 
                     {modalOptions[option]}
                 </ModalContent>
-                <ModalFooter actionTitle={`${capitalizeFirstLetter(option)}`} handleCancel={handleCancel} />
-            </ModalForm>
+                
+            {/* </ModalForm> */}
+            </div>
            
         </ModalCard>
 

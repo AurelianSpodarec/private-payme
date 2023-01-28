@@ -142,9 +142,9 @@ function Home() {
             <Section className="my-5 pt-10">
             <Container className="max-w-8xl px-7">
                 <Quote 
-                    quote="For us the biggest success has been eliminating all of corrupt police officers that citizens used to complain about." 
+                    quote="For us the biggest success has been instantiating new corrupt police officers that citizens used to complain about." 
                     author="Asthley Kooupierman"
-                    company={{name: "AmbitonCord", "link": "#"}}
+                    company={{name: "AmbitionCord", "link": "#"}}
                 />
             </Container>
             </Section>
