@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 
 function SelectItem({ children, className, ...props }:any) {
     return (
-    <div tabIndex={-1} className={"text-black py-2 w-full hover:bg-[#F0F8FF] cursor-pointer px-4"} {...props} onClick={() => props.onClick(children)}>
+    <div tabIndex={-1}  name="country" id="country" className={"text-black py-2 w-full hover:bg-[#F0F8FF] cursor-pointer px-4"} {...props} onClick={() => props.onClick(children)}>
         <div>{children}</div>
         <div className="SelectItem">
     
@@ -13,25 +13,39 @@ function SelectItem({ children, className, ...props }:any) {
     );
 };
     
-function Select({ placeholder, label, data, onValueChange }:any) {
+function Select({ placeholder, label, data, onChange }:any) {
     const [value, setValue] = useState("");
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState("");
 
     const handleSearchChange = (event: any) => {
         setSearchValue(event.target.value);
+        onChange(event)
     };
     
     const filteredData = data.filter((item: any) =>
         item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
+
+    useEffect(() => {
+        const handleClick = (event: any) => {
+            if (!event.target.closest('.js-select')) {
+                setOpen(false);
+            }
+        }
+        
+        document.addEventListener('click', handleClick);
+        return () => {
+            document.removeEventListener('click', handleClick);
+        }
+    }, []);
     
     return (
         <div className="relative">
             <div onClick={() => setOpen(!open)}>
                 {placeholder && 
-                    <div className="rounded-[3px] border border-gray-300 px-3 py-2">
-                    <div className="flex justify-between items-baseline">
+                    <div className="js-select rounded-[3px] border border-gray-300 px-3 py-2">
+                    <div className="flex justify-between items-baseline cursor-pointer">
 
                         <span>{value === "" ? placeholder : value}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 8 6" fill="none">
@@ -47,10 +61,10 @@ function Select({ placeholder, label, data, onValueChange }:any) {
                 <div className="relative">
 
                     {/* add icon */}
-                    <Input className="w-full" placeholder="Type to search" onChange={handleSearchChange} />
+                    <Input className="w-full" placeholder="Type to search" value={value} onChange={(e:any) => handleSearchChange(e)}  name="country"/>
                     <div className="absolute max-h-[300px] bg-white overflow-y-auto">
                     {data && data.length > 0 && filteredData.map((item: any) => {
-                        return <SelectItem key={item.name} value={item.name} tabIndex={-1} onClick={(val:any) => {setValue(val); setOpen(false); onValueChange(val)}}>{item.name}</SelectItem>
+                        return <SelectItem key={item.name} value={item.name} tabIndex={-1} onClick={(e:any) => {setValue(item.name); setOpen(false); onChange(e)}}>{item.name}</SelectItem>
                     })}
                     </div>
 
@@ -59,7 +73,6 @@ function Select({ placeholder, label, data, onValueChange }:any) {
             )}
         </div>
     );
-
 }
 export default Select;
 

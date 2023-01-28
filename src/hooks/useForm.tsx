@@ -3,7 +3,7 @@ import { useState } from 'react';
 const useForm = (callback?:any, customValues?:any) => {
     const [values, setValues] = useState(customValues)
 
-    const handleChange = (event:React.FormEvent<HTMLFormElement>) => {
+    const handleChange = (event:any) => {
         const { name, value }:any = event.target;
 
         setValues({
@@ -12,7 +12,7 @@ const useForm = (callback?:any, customValues?:any) => {
         });
     }
 
-    const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event:any) => {
         event.preventDefault();
         callback()
     }

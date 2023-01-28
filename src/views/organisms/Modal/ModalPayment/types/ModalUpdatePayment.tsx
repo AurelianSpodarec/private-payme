@@ -32,11 +32,11 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
         post_code: userInfo.post_code
     })
 
-    console.log("Modal payment form", form.values.address_one)
+    console.log("Modal payment form", form)
 
     function submitForm(e:any) {
         e.preventDefault();
-        console.log("submit values", form.values)
+        console.log("submit val3333333333333ues", form.values)
     }
 
     function handleAction(e:any) {
@@ -51,9 +51,13 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
         modalContext.close()
     }
 
+
+    function handleSelectChange(e:any) {
+        form.handleChange( {target: { "name": "country", "value": e}});
+    }
    
     return (
-         <form>
+         <form onSubmit={(e) => submitForm(e)}>
 
             <ModalRow>
                 <CardPaymentInput 
@@ -117,7 +121,8 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                     name="country"
                     placeholder="Country"
                     data={countryList} 
-                    onValueChange={(e:any) => console.log(e)}  
+                    onChange={(e:any) => handleSelectChange(e)}
+                    // onValueChange={(e:any) =>  console.log("selectchange", e)} //form.handleChange(e)}
                 />
             </ModalRow>
 
