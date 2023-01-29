@@ -119,7 +119,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                 <Select 
                     id="country"
                     name="country"
-                    placeholder="Country"
+                    placeholder="Select country"
                     data={countryList} 
                     onChange={(e:any) => handleSelectChange(e)}
                     // onValueChange={(e:any) =>  console.log("selectchange", e)} //form.handleChange(e)}
