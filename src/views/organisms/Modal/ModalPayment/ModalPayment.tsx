@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import useModal from "context/useModal";
+import useModal from "hooks/useModal";
 import { capitalizeFirstLetter } from 'utils/common';
 import useForm from "hooks/useForm";
 import countryList from "config/countryList.json";

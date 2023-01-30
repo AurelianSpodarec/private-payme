@@ -1,5 +1,5 @@
 import { useAuth } from "context/authContext";
-import useModal from "context/useModal";
+import useModal from "hooks/useModal";
 import { InterfaceDetective } from "interface/InterfaceDetective";
 import Button from "views/atoms/Button/Button";
 

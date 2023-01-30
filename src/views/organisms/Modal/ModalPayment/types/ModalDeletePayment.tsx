@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import useModal from "context/useModal";
+import useModal from "hooks/useModal";
 import ModalHeader from '../../_components/ModalHeader';
 import ModalFooter from '../../_components/ModalFooter';
 

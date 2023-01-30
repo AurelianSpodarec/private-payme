@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as ReactDOM from 'react-dom';
 
-import useModal from 'context/useModal';
+import useModal from 'hooks/useModal';
 
 
 import ModalPayment from './ModalPayment/ModalPayment';

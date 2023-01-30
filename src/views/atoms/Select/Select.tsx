@@ -66,7 +66,7 @@ function Select({ placeholder, label, data, onChange }:any) {
                     <Input className="w-full" placeholder="Type to search" value={value} onChange={(e:any) => handleSearchChange(e)}  name="country"/>
                     <div className="absolute max-h-[300px] bg-white overflow-y-auto">
                     {data && data.length > 0 && filteredData.map((item: any) => {
-                        return <SelectItem key={item.name} value={item.name} tabIndex={-1} onClick={(e:any) => {setValue(item.name); setOpen(false); onChange(e)}}>{item.name}</SelectItem>
+                        return <SelectItem key={item.code} value={item.code} tabIndex={-1} onClick={(e:any) => {setValue(item.name); setOpen(false); onChange(e)}}>{item.name}</SelectItem>
                     })}
                     </div>
 

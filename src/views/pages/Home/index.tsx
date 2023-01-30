@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useAuth } from "context/authContext";
-import useModal from "context/useModal";
+import useModal from "hooks/useModal";
 
 import { getDetectiveList } from "services/portaire/api/detective/detective";
 

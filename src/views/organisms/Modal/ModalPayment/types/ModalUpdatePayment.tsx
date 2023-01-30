@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import useModal from "context/useModal";
+import useModal from "hooks/useModal";
 import useForm from "hooks/useForm";
 import countryList from "config/countryList.json";
 
@@ -64,7 +64,7 @@ function ModalUpdatePayment({config}:ModalUpdatePaymentProps) {
                     cardNumberInputProps={{ 
                         value: form.values.number,
                         name: "number",
-                        onChange:(e:any) => form.handleChange(e),
+                        onChange:(e:any) => console.log("OUTSIDE card", e.target),//form.handleChange(e),
                         maskInitial: 12,
                     }}
                     cardExpiryInputProps={{ 
