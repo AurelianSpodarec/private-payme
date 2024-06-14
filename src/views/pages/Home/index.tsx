@@ -13,10 +13,7 @@ import Quote from "views/molecules/Quote";
 import DetectiveListIndex from "../Detective/_components/DetectiveListIndex";
 import Tawk from "views/atoms/Tawk";
 
-const randomDetectivesList = [
-    {"_id":"63d2b04dfsdg4f4rrff97cb2", "avatar": { "src": "https://i.guim.co.uk/img/media/4eb3231a2d6053a4923e5b9c022d5f470b9080a9/0_591_2417_1450/master/2417.jpg?width=465&quality=85&dpr=1&s=none", "alt": ""}, "email":"jamesbond@mi5.co.uk","first_name":"James","last_name":"Bond","address_one":"CLASSIFIED","address_two":"CLASSIFIED","state":"London","post_code":"CLASSIFIED","active": false, "__v":0},
-    {"_id":"63d2b028334rfffgfer34442", "avatar": { "src": "https://static01.nyt.com/images/2011/06/25/arts/25falk-span/25falk-span-articleLarge.jpg?quality=75&auto=webp&disable=upscale", "alt": ""}, "email":"john@doe.com","first_name":"Peter","last_name":"Falk","address_one":"221b Baker St","address_two":"London","state":"London","post_code":"NW1 6XE","active": false, "__v":0}
-]
+
 
 function Home() {
 

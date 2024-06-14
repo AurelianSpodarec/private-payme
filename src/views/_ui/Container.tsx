@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 function Container({ children, style, className, size }: ContainerProps) {
-    const options: any = {
+    const options:any = {
         fluid: 'fluid',
         sm: 'sm',
         base: 'base',
@@ -16,7 +16,6 @@ function Container({ children, style, className, size }: ContainerProps) {
         <div
             style={style}
             className={`mx-auto ${className}`}
-            // className={`container ${size ? `container--${options[size]}` : 'container--fluid'}`}
         >
             {children}
         </div>

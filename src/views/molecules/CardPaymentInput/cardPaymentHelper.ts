@@ -10,21 +10,8 @@ export const cardPaymentHelper = {
 
     // Formatting
     formatCardNumber(value:string) {
-        // if(value === null ||  value === undefined) return;
-        // return value.replace(/\D/g,'').replace(/(\d{4})/g, '$1 ').trim();
-
-        let masked = "";
-        let count = 0;
-    
-        for (let char of value) {
-            masked += char;
-            count++;
-            if (count % 4 === 0 && count !== value.length) {
-                masked += " ";
-            }
-        }
-    
-        return masked;
+        if(value === null ||  value === undefined) return;
+        return value.replace(/\D/g,'').replace(/(\d{4})/g, '$1 ').trim();    
     },
     formatCardExpiry(value:string) {
         return value.replace(/[^0-9]/g, '')

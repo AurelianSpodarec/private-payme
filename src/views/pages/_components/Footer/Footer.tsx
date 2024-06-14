@@ -10,10 +10,6 @@ function Footer() {
         <Section className="mb-5 ">
         <Container className="py-14">
 
-            {/* <div>
-                <img className="absolute -top-[620px] -right-[600px] z-0" style={{ "transform": "scaleX(-1)" }} src="https://jkfranko.com/wp-content/uploads/2018/10/cropped-blood-splatter-texture-png-5-1.png"/>
-            </div> */}
-
             <div className="flex justify-between">
                 
                 <div>
